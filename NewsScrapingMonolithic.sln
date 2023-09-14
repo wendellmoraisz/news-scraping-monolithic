@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsScrapingMonolithic.WebAPI", "NewsScrapingMonolithic.WebAPI\NewsScrapingMonolithic.WebAPI.csproj", "{7F89B089-5360-4ABC-A63D-41D7D0355232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsScrapingMonolothic.Domain", "NewsScrapingMonolothic.Domain\NewsScrapingMonolothic.Domain.csproj", "{784C0203-0B10-4629-8A1D-5171781CEE67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsScrapingMonolithic.Application", "NewsScrapingMonolithic.Application\NewsScrapingMonolithic.Application.csproj", "{F4B6B54F-0101-4D1A-A527-EA174FB29418}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{134CA0C1-FAC5-4500-84FF-1221BB7778A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3B88AC35-EC7B-4CAA-B1E1-0A9469813267}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{1128EE8C-22D6-4602-98C4-3582D35AC658}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsScrapingMonolithic.Persistence", "NewsScrapingMonolithic.Persistence\NewsScrapingMonolithic.Persistence.csproj", "{A09926A7-5D90-41D4-89A8-D06C77C45609}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F89B089-5360-4ABC-A63D-41D7D0355232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F89B089-5360-4ABC-A63D-41D7D0355232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F89B089-5360-4ABC-A63D-41D7D0355232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F89B089-5360-4ABC-A63D-41D7D0355232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{784C0203-0B10-4629-8A1D-5171781CEE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{784C0203-0B10-4629-8A1D-5171781CEE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{784C0203-0B10-4629-8A1D-5171781CEE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{784C0203-0B10-4629-8A1D-5171781CEE67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4B6B54F-0101-4D1A-A527-EA174FB29418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4B6B54F-0101-4D1A-A527-EA174FB29418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4B6B54F-0101-4D1A-A527-EA174FB29418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4B6B54F-0101-4D1A-A527-EA174FB29418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09926A7-5D90-41D4-89A8-D06C77C45609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09926A7-5D90-41D4-89A8-D06C77C45609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09926A7-5D90-41D4-89A8-D06C77C45609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09926A7-5D90-41D4-89A8-D06C77C45609}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F89B089-5360-4ABC-A63D-41D7D0355232} = {134CA0C1-FAC5-4500-84FF-1221BB7778A8}
+		{F4B6B54F-0101-4D1A-A527-EA174FB29418} = {3B88AC35-EC7B-4CAA-B1E1-0A9469813267}
+		{784C0203-0B10-4629-8A1D-5171781CEE67} = {3B88AC35-EC7B-4CAA-B1E1-0A9469813267}
+		{A09926A7-5D90-41D4-89A8-D06C77C45609} = {1128EE8C-22D6-4602-98C4-3582D35AC658}
+	EndGlobalSection
+EndGlobal
