@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "6k6R6eIKNcU7AYAglyWNbfFFPT6SrTLtO5uRioPTIPvJf3iohzaJshippvvMjgQb+OTnO6XtfBsGLbZuVjQIqg==",
+  "dgSpecHash": "PqXz7//l9vqDQJIKEizS4jEaXwdbXBSVUOMn7x65ysKyeKZs15NWQJxxL2CW6I2kgQiUVLkpTFjR9yOBPU7qcg==",
   "success": true,
   "projectFilePath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolithic.Application/NewsScrapingMonolithic.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/wendell/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/home/wendell/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "/home/wendell/.nuget/packages/mediatr/12.1.1/mediatr.12.1.1.nupkg.sha512",
+    "/home/wendell/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/home/wendell/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/home/wendell/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "/home/wendell/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "/home/wendell/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/home/wendell/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
