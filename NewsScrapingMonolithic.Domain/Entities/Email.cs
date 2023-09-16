@@ -5,7 +5,7 @@ namespace NewsScrapingMonolithic.Domain.Entities;
 
 public sealed class Email : BaseEntity
 {
-    private string Address { get; set; }
+    public string Address { get; set; }
 
     public Email(string emailAddress)
     {
