@@ -4,11 +4,10 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyName>NewsScrapingMonolithic.Domain</AssemblyName>
+        <RootNamespace>NewsScrapingMonolithic.Domain</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Common\" />
-      <Folder Include="Entities\" />
-    </ItemGroup>
+
 
 </Project>

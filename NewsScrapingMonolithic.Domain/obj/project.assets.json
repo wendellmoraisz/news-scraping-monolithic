@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolothic.Domain/NewsScrapingMonolothic.Domain.csproj",
-      "projectName": "NewsScrapingMonolothic.Domain",
-      "projectPath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolothic.Domain/NewsScrapingMonolothic.Domain.csproj",
+      "projectUniqueName": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolithic.Domain/NewsScrapingMonolithic.Domain.csproj",
+      "projectName": "NewsScrapingMonolithic.Domain",
+      "projectPath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolithic.Domain/NewsScrapingMonolithic.Domain.csproj",
       "packagesPath": "/home/wendell/.nuget/packages/",
-      "outputPath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolothic.Domain/obj/",
+      "outputPath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolithic.Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/wendell/.nuget/NuGet/NuGet.Config"

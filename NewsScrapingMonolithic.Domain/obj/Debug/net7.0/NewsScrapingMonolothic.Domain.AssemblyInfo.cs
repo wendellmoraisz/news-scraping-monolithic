@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("NewsScrapingMonolothic.Domain")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("NewsScrapingMonolithic.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("NewsScrapingMonolothic.Domain")]
-[assembly: System.Reflection.AssemblyTitleAttribute("NewsScrapingMonolothic.Domain")]
+[assembly: System.Reflection.AssemblyProductAttribute("NewsScrapingMonolithic.Domain")]
+[assembly: System.Reflection.AssemblyTitleAttribute("NewsScrapingMonolithic.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.

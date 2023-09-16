@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsScrapingMonolithic.WebAPI", "NewsScrapingMonolithic.WebAPI\NewsScrapingMonolithic.WebAPI.csproj", "{7F89B089-5360-4ABC-A63D-41D7D0355232}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsScrapingMonolothic.Domain", "NewsScrapingMonolothic.Domain\NewsScrapingMonolothic.Domain.csproj", "{784C0203-0B10-4629-8A1D-5171781CEE67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsScrapingMonolithic.Domain", "NewsScrapingMonolithic.Domain\NewsScrapingMonolithic.Domain.csproj", "{784C0203-0B10-4629-8A1D-5171781CEE67}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsScrapingMonolithic.Application", "NewsScrapingMonolithic.Application\NewsScrapingMonolithic.Application.csproj", "{F4B6B54F-0101-4D1A-A527-EA174FB29418}"
 EndProject

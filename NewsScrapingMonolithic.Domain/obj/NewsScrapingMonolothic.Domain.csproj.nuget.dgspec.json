@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolothic.Domain/NewsScrapingMonolothic.Domain.csproj",
-        "projectName": "NewsScrapingMonolothic.Domain",
+        "projectName": "NewsScrapingMonolithic.Domain",
         "projectPath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolothic.Domain/NewsScrapingMonolothic.Domain.csproj",
         "packagesPath": "/home/wendell/.nuget/packages/",
         "outputPath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolothic.Domain/obj/",
