@@ -1,5 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using MediatR;
+using NewsScrapingMonolithic.Application.Common.Behaviors;
+using FluentValidation;
 
 namespace NewsScrapingMonolithic.Application;
 
@@ -12,5 +15,7 @@ public static class ServiceExtensions
         {
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
         });
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     }
 }
