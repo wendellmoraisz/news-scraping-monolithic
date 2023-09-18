@@ -2,5 +2,5 @@ namespace NewsScrapingMonolithic.Application.Repositories;
 
 public interface IUnityOfWork
 {
-    Task Save();
+    Task Save(CancellationToken cancellationToken);
 }

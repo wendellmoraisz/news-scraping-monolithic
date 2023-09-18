@@ -4,5 +4,5 @@ namespace NewsScrapingMonolithic.Application.Repositories;
 
 public interface IEmailRepository : IBaseRepository<Email>
 {
-    Task<Email> GetByAddress(string emailAddress);
+    Task<Email> GetByAddress(string emailAddress, CancellationToken cancellationToken);
 }
