@@ -1,5 +1,6 @@
 using FluentValidation;
 using MediatR;
+using NewsScrapingMonolithic.Application.Common.Exceptions;
 
 namespace NewsScrapingMonolithic.Application.Common.Behaviors;
 
@@ -18,19 +19,24 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
         if (!_validators.Any()) return await next();
         
         var context = new ValidationContext<TRequest>(request);
+        var validationTasks = _validators.Select(x => x.ValidateAsync(context, cancellationToken)).ToList();
 
-        var errors = _validators
-            .Select(x => x.Validate(context))
-            .SelectMany(x => x.Errors)
-            .Where(x => x != null)
-            .Select(x => x.ErrorMessage)
+        var errors = validationTasks
+            .SelectMany(task => task.Result.Errors)
+            .Where(error => error != null)
+            .Select(error => error)
             .Distinct()
             .ToArray();
 
-        if (!errors.Any()) return await next();
-        if (errors.Length > 1)
-            throw new BadRequestException(errors);
-        throw new BadRequestException(errors[0]);
+        var errorsCodes = errors.Select(e => e.ErrorCode).ToArray();
+        var errorsMessages = errors.Select(e => e.ErrorMessage).ToArray();
+        
+        if (errorsCodes.Contains("409"))
+        {
+            throw new ConflictException(errorsMessages);
+        }
 
+        if (errors.Any()) throw new BadRequestException(errorsMessages);
+        return await next();
     }
 }

@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics;
-using NewsScrapingMonolithic.Application.Common;
+using NewsScrapingMonolithic.Application.Common.Exceptions;
 
 namespace NewsScrapingMonolithic.WebAPI.Extensions;
 
@@ -24,6 +24,7 @@ public static class ErrorHandlerExtensions
                     BadRequestException => (int) HttpStatusCode.BadRequest,
                     OperationCanceledException => (int) HttpStatusCode.ServiceUnavailable,
                     NotFoundException => (int) HttpStatusCode.NotFound,
+                    ConflictException => (int) HttpStatusCode.Conflict,
                     _ => (int) HttpStatusCode.InternalServerError
                 };
 

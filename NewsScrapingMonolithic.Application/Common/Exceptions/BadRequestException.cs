@@ -1,4 +1,4 @@
-namespace NewsScrapingMonolithic.Application.Common;
+namespace NewsScrapingMonolithic.Application.Common.Exceptions;
 
 public class BadRequestException : Exception
 {
@@ -6,7 +6,7 @@ public class BadRequestException : Exception
     {
     }
 
-    public BadRequestException(string[] errors) : base("Muitos erros ocorreram. Veja os detalhes")
+    public BadRequestException(string[] errors) : base(string.Join(";", errors))
     {
         Errors = errors;
     }

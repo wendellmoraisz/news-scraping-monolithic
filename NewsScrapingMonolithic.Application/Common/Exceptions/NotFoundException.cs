@@ -1,4 +1,4 @@
-namespace NewsScrapingMonolithic.Application.Common;
+namespace NewsScrapingMonolithic.Application.Common.Exceptions;
 
 public class NotFoundException : Exception
 {
