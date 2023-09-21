@@ -31,11 +31,7 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
         var errorsCodes = errors.Select(e => e.ErrorCode).ToArray();
         var errorsMessages = errors.Select(e => e.ErrorMessage).ToArray();
         
-        if (errorsCodes.Contains("409"))
-        {
-            throw new ConflictException(errorsMessages);
-        }
-
+        if (errorsCodes.Contains("409")) throw new ConflictException(errorsMessages);
         if (errors.Any()) throw new BadRequestException(errorsMessages);
         return await next();
     }
