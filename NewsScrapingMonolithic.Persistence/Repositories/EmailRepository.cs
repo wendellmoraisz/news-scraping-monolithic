@@ -11,7 +11,7 @@ public class EmailRepository : BaseRepository<Email>, IEmailRepository
     {
     }
     
-    public Task<Email> GetByAddress(string emailAddress, CancellationToken cancellationToken)
+    public Task<Email?> GetByAddress(string emailAddress, CancellationToken cancellationToken)
     {
         return Context.Set<Email>().FirstOrDefaultAsync(x => x.Address == emailAddress, cancellationToken);
     }

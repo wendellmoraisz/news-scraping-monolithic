@@ -6,24 +6,4 @@ namespace NewsScrapingMonolithic.Domain.Entities;
 public sealed class Email : BaseEntity
 {
     public string Address { get; set; }
-
-    public Email(string emailAddress)
-    {
-        if (!IsValid(emailAddress))
-            throw new ArgumentException("E-mail inválido");
-        Address = emailAddress;
-    }
-
-    private bool IsValid(string emailAddress)
-    {
-        try
-        {
-            var email = new MailAddress(emailAddress);
-            return true;
-        }
-        catch (FormatException)
-        {
-            return false;
-        }
-    }
 }
