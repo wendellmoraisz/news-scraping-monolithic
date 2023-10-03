@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="12.0.1" />
+      <PackageReference Include="HtmlAgilityPack" Version="1.11.53" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
       <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     </ItemGroup>
@@ -15,5 +16,6 @@
     <ItemGroup>
       <ProjectReference Include="..\NewsScrapingMonolithic.Application\NewsScrapingMonolithic.Application.csproj" />
     </ItemGroup>
+
 
 </Project>

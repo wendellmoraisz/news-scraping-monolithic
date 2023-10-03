@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9pSKNsARwWOPAiEnoYZeTc0zPis4M0Oo3vSNXWAXBVXDhfNGUiUYYeL+OhKGx4JwP+lv5zX84gVW26xs4I7Q8A==",
+  "dgSpecHash": "WOg5zYZ/fvVDTPcgcFfNJTKA5T1Jh8awDcx+B7e493TXap3k9fwI8+dngWlG4+OznRHoremfB21MLAaCXt9Uyw==",
   "success": true,
   "projectFilePath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolithic.Domain/NewsScrapingMonolithic.Domain.csproj",
-  "expectedPackageFiles": [
-    "/home/wendell/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
-    "/home/wendell/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

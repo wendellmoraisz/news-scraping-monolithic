@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wFmjiwmQP1JqUJIY/fAO6A6StR9N/ibcPxviaQQGWz5BwOt3m1w/ld/0i+Bbo9onhEj8tQxcV2Yyaslex7UIMA==",
+  "dgSpecHash": "69xu8WTmjy5ErXC7OccXyh07pW6t4VKk1g8Lg2vot5muq50G7Iyzm6iDKwH4syeB8UQ1Gm+2r67szgctzqWAVA==",
   "success": true,
   "projectFilePath": "/home/wendell/RiderProjects/NewsScrapingMonolithic/NewsScrapingMonolithic.Persistence/NewsScrapingMonolithic.Persistence.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/home/wendell/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/home/wendell/.nuget/packages/fluentvalidation/11.7.1/fluentvalidation.11.7.1.nupkg.sha512",
     "/home/wendell/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.7.1/fluentvalidation.dependencyinjectionextensions.11.7.1.nupkg.sha512",
+    "/home/wendell/.nuget/packages/htmlagilitypack/1.11.53/htmlagilitypack.1.11.53.nupkg.sha512",
     "/home/wendell/.nuget/packages/mediatr/12.1.1/mediatr.12.1.1.nupkg.sha512",
     "/home/wendell/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/home/wendell/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",

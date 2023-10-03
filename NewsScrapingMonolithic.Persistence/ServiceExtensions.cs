@@ -2,8 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NewsScrapingMonolithic.Application.Repositories;
+using NewsScrapingMonolithic.Application.Services;
 using NewsScrapingMonolithic.Persistence.Context;
+using NewsScrapingMonolithic.Persistence.Credentials;
 using NewsScrapingMonolithic.Persistence.Repositories;
+using NewsScrapingMonolithic.Persistence.Services;
 
 namespace NewsScrapingMonolithic.Persistence;
 
@@ -17,5 +20,8 @@ public static class ServiceExtensions
 
         services.AddScoped<IUnityOfWork, UnityOfWork>();
         services.AddScoped<IEmailRepository, EmailRepository>();
+        services.AddScoped<INewsRepository, NewsRepository>();
+        services.AddScoped<IScrapingService, ScrapingService>();
+        services.AddScoped<IEmailService, EmailService>();
     }
 }

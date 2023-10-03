@@ -4,12 +4,6 @@ namespace NewsScrapingMonolithic.Domain.Entities;
 
 public sealed class News : BaseEntity
 {
-    public string Title;
-    public string Content;
-
-    public News(string title, string content)
-    {
-        Title = title;
-        Content = content;
-    }
+    public string Title { get; set; }
+    public string Content { get; set; }
 }

@@ -11,8 +11,8 @@ public class NewsRepository : BaseRepository<News>, INewsRepository
     {
     }
 
-    public Task<News> GetByTitle(string newsTitle, CancellationToken cancellationToken)
+    public Task<News?> GetByTitle(string newsTitle, CancellationToken cancellationToken)
     {
-        return Context.Set<News>().FirstAsync(x => x.Title == newsTitle, cancellationToken);
+        return Context.Set<News>().FirstOrDefaultAsync(x => x.Title == newsTitle, cancellationToken);
     }
 }
