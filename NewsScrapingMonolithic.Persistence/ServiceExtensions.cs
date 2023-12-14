@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NewsScrapingMonolithic.Application.Repositories;
 using NewsScrapingMonolithic.Application.Services;
 using NewsScrapingMonolithic.Persistence.Context;
-using NewsScrapingMonolithic.Persistence.Credentials;
 using NewsScrapingMonolithic.Persistence.Repositories;
 using NewsScrapingMonolithic.Persistence.Services;
 
@@ -14,7 +13,7 @@ public static class ServiceExtensions
 {
     public static void ConfigurePersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("mysql");
+        var connectionString = configuration.GetConnectionString("NewsScrapingDbConfig");
         services.AddDbContext<DataContext>(opts =>
         opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
