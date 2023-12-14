@@ -1,0 +1,14 @@
+version: "3.4"
+
+services: 
+  newssrapingdb:
+    image: mysql
+    
+  newsscrapingmonolithic.api:
+    image: ${DOCKER_REGISTRY-}newsscrapingmonolithicapi
+    build:
+      context: .
+      dockerfile: NewsScrapingMonolithic.WebAPI/Dockerfile
+    
+volumes: 
+  mysql_data:

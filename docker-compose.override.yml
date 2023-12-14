@@ -1,0 +1,25 @@
+services:
+  newssrapingdb:
+    container_name: newssrapingdb
+    restart: always
+    environment:
+      MYSQL_DATABASE: "NewsScraping"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+      - "3307:3307"
+    volumes:
+      - mysql_data:/var/lib/mysql
+        
+  newsscrapingmonolithic.api:
+    container_name: newsscrapingmonolithic.api
+    environment:
+      - "ConnectionStrings__NewsScrapingDbConfig=server=newssrapingdb;database=NewsScraping;user=root;password=password"
+      - "EmailServiceCredentials__SenderEmail=noticiasifpa@hotmail.com"
+      - "EmailServiceCredentials__SenderPassword=password"
+      - "EmailServiceCredentials__SmtpHost=smtp-mail.outlook.com"
+      - "EmailServiceCredentials__SmtpPort=587"
+      - "EmailServiceCredentials__EnableSsl=true"
+    depends_on:
+      - newssrapingdb
+    ports:
+      - "8000:80"
