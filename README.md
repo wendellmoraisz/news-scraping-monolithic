@@ -96,13 +96,13 @@
 ### Open your Git Terminal and clone this repository
 
 ```git
-  $ git clone "git@github.com:wendellmoraisz/news-scraping-microservices.git"
+  $ git clone "git@github.com:wendellmoraisz/news-scraping-monolithic.git"
 ```
 
 ### Make Pull
 
 ```git
-  $ git pull "git@github.com:wendellmoraisz/news-scraping-microservices.git"
+  $ git pull "git@github.com:wendellmoraisz/news-scraping-monolithic.git"
 ```
 
 <br>
