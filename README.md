@@ -134,7 +134,7 @@ Navigate to project folder and run it using `docker-compose`
   | 🧑‍💻 Author:  
 </h2>
 
-> <a target="_blank" href="https://www.linkedin.com/in/wendell-morais/"> <img width="350px" src="https://instagram.fatm2-1.fna.fbcdn.net/v/t51.2885-15/364236795_658305826235139_7313126893555339390_n.heic?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE0NDAuc2RyIn0&_nc_ht=instagram.fatm2-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=jiK3Jgp18FIAX9aCnzv&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzE1Nzk0NTg3NDE1MTgwODk2Mw%3D%3D.2-ccb7-5&oh=00_AfDXD8WG7oupvawPVKJ_nnXk94Nf27W7vYU3osKg4K79MA&oe=65808644&_nc_sid=ee9879"/> <br> <p> <b> - Wendell Morais</b> </p></a>
+> <a target="_blank" href="https://www.linkedin.com/in/wendell-morais/"> <img width="350px" src="https://i.imgur.com/ND6tFVx.png"/> <br> <p> <b> - Wendell Morais</b> </p></a>
 
 <h1>
   <a target="_blank" href='https://github.com/wendellmoraisz'>
