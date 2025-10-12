@@ -1,7 +1,7 @@
 version: "3.4"
 
 services: 
-  newssrapingdb:
+  newsscrapingdb:
     image: mysql
     
   newsscrapingmonolithic.api:
