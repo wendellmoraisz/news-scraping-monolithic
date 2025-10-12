@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using NewsScrapingMonolithic.Application.Services;
 using HtmlAgilityPack;
 using NewsScrapingMonolithic.Domain.Entities;
@@ -6,12 +7,21 @@ namespace NewsScrapingMonolithic.Persistence.Services;
 
 public class ScrapingService : IScrapingService
 {
+    private readonly string _baseUrl;
+    private readonly string _host;
+    
+    public ScrapingService(string baseUrl, string host)
+    {
+        this._baseUrl = baseUrl;
+        this._host = host;
+    }
+
     private const string BaseUrl = "https://altamira.ifpa.edu.br";
     private const string Host = "altamira.ifpa.edu.br";
 
-    public async Task<IEnumerable<News>> ExtractNews()
+    public async Task<IEnumerable<News>> ExtractNews(string baseUrl, string host)
     {
-        const string newsUrl = $"{BaseUrl}/ultimas-noticias";
+        var newsUrl = $"{baseUrl}/ultimas-noticias";
         
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("host", Host);
@@ -31,7 +41,7 @@ public class ScrapingService : IScrapingService
             var news = new News
             {
                 Title = newsHeader.SelectSingleNode("a").InnerText,
-                Content = await GetDescriptionAsync(newsHeader.SelectSingleNode("a").GetAttributeValue("href", ""))
+                Content = await GetDescriptionAsync(baseUrl, host, newsHeader.SelectSingleNode("a").GetAttributeValue("href", ""))
             };
             newsList.Add(news);
         }
@@ -39,10 +49,10 @@ public class ScrapingService : IScrapingService
         return newsList;
     }
 
-    private static async Task<string> GetDescriptionAsync(string descUrl)
+    private async Task<string> GetDescriptionAsync(string baseUrl, string host, string descUrl)
     {
         using var httpClient = new HttpClient();
-        using var response = await httpClient.GetAsync(BaseUrl + descUrl);
+        using var response = await httpClient.GetAsync(baseUrl + descUrl);
         var pageContent = await response.Content.ReadAsStringAsync();
         
         var htmlDocument = new HtmlDocument();
@@ -59,8 +69,8 @@ public class ScrapingService : IScrapingService
         );
             
         RemoveNodes(nodesToRemove);
-        SetHostUrlInImagesSrc(contentSection.Descendants("img"));
-        SetHostUrlInLinksHref(contentSection.Descendants("a"));
+        SetHostUrlInImagesSrc(host, contentSection.Descendants("img"));
+        SetHostUrlInLinksHref(host, contentSection.Descendants("a"));
         
         return contentSection.InnerHtml;
     }
@@ -73,16 +83,16 @@ public class ScrapingService : IScrapingService
         }
     }
 
-    private static void SetHostUrlInImagesSrc(IEnumerable<HtmlNode> htmlImages)
+    private void SetHostUrlInImagesSrc(string host, IEnumerable<HtmlNode> htmlImages)
     {
         foreach (var img in htmlImages)
         {
             var href = img.GetAttributeValue("src", "");
-            img.SetAttributeValue("src", Host + href);
+            img.SetAttributeValue("src", host + href);
         }
     }
 
-    private static void SetHostUrlInLinksHref(IEnumerable<HtmlNode> htmlLinks)
+    private void SetHostUrlInLinksHref(string host, IEnumerable<HtmlNode> htmlLinks)
     {
         foreach (var link in htmlLinks)
         {
@@ -90,7 +100,7 @@ public class ScrapingService : IScrapingService
 
             if (!IsValidUrl(href))
             {
-                link.SetAttributeValue("href", Host + href);
+                link.SetAttributeValue("href", host + href);
             }
         }
     }
