@@ -22,5 +22,6 @@ public static class ServiceExtensions
         services.AddScoped<INewsRepository, NewsRepository>();
         services.AddScoped<IScrapingService, ScrapingService>();
         services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IHostRepository, HostRepository>();
     }
 }

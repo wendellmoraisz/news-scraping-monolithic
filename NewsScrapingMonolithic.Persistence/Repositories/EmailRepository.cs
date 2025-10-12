@@ -15,4 +15,11 @@ public class EmailRepository : BaseRepository<Email>, IEmailRepository
     {
         return Context.Set<Email>().FirstOrDefaultAsync(x => x.Address == emailAddress, cancellationToken);
     }
+
+    public Task<List<Email>> GetByHost(string host, CancellationToken cancellationToken)
+    {
+        return Context.Emails
+            .Where(email => email.Hosts.Any(x => x.Address == host))
+            .ToListAsync(cancellationToken: cancellationToken);
+    }
 }

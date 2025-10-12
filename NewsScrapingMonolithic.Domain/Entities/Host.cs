@@ -2,8 +2,8 @@ using NewsScrapingMonolithic.Domain.Common;
 
 namespace NewsScrapingMonolithic.Domain.Entities;
 
-public sealed class Email : BaseEntity
+public sealed class Host : BaseEntity
 {
     public string Address { get; set; }
-    public IEnumerable<Host> Hosts { get; set; }
+    public IEnumerable<Email> Emails { get; set; }
 }

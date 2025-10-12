@@ -11,4 +11,5 @@ public class DataContext : DbContext
     
     public DbSet<Email> Emails { get; set; }
     public DbSet<News> News { get; set; }
+    public DbSet<Host> Hosts { get; set; }
 }
