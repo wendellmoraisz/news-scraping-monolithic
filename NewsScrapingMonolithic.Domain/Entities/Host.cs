@@ -5,5 +5,5 @@ namespace NewsScrapingMonolithic.Domain.Entities;
 public sealed class Host : BaseEntity
 {
     public required string Address { get; set; }
-    public required IEnumerable<Email> Emails { get; set; }
+    public ICollection<Email> Emails { get; set; } = new List<Email>();
 }

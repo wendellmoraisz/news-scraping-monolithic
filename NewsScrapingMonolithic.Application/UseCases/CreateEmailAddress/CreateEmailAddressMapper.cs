@@ -7,7 +7,8 @@ public sealed class CreateEmailAddressMapper : Profile
 {
     public CreateEmailAddressMapper()
     {
-        CreateMap<CreateEmailAddressRequest, Email>();
+        CreateMap<CreateEmailAddressRequest, Email>()
+            .ForMember(email => email.Hosts, options => options.Ignore());
         CreateMap<Email, CreateEmailAddressResponse>();
     }
 }
