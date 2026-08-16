@@ -16,6 +16,10 @@ public class CreateEmailAddressValidator : AbstractValidator<CreateEmailAddressR
             .NotEmpty()
             .EmailAddress().WithMessage("Endereço de e-mail inválido")
             .MustAsync(EmailIsNotRegistered).WithMessage("E-mail já cadastrado").WithErrorCode("409");
+
+        RuleForEach(x => x.Hosts)
+            .NotNull()
+            .NotEmpty();
     }
 
     private async Task<bool> EmailIsNotRegistered(string emailAddress, CancellationToken cancellationToken)
