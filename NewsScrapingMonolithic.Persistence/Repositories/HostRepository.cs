@@ -13,4 +13,7 @@ public class HostRepository : BaseRepository<Host>, IHostRepository
 
     public Task<Host?> GetByAddress(string address, CancellationToken cancellationToken) =>
          Context.Hosts.FirstOrDefaultAsync(x => x.Address == address, cancellationToken: cancellationToken);
+
+    public Task<List<Host>> GetByAddresses(IReadOnlyCollection<string> addresses, CancellationToken cancellationToken) =>
+     Context.Hosts.Where(x => addresses.Contains(x.Address)).ToListAsync(cancellationToken: cancellationToken);
 }

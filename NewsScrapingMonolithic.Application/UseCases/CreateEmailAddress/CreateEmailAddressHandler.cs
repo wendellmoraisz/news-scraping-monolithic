@@ -25,19 +25,27 @@ public sealed class CreateEmailAddressHandler : IRequestHandler<CreateEmailAddre
         _mapper = mapper;
         _hostRepository = hostRepository;
     }
-    
+
     public async Task<CreateEmailAddressResponse> Handle(CreateEmailAddressRequest request, CancellationToken cancellationToken)
     {
         var email = _mapper.Map<Email>(request);
+
+        var hostAdresses = request.Hosts
+        .Distinct()
+        .Select(hostAddress => hostAddress.Trim().ToLowerInvariant())
+        .ToArray();
+
+        var existingHosts = await _hostRepository.GetByAddresses(hostAdresses, cancellationToken);
+        var hostsByAddress = existingHosts.ToDictionary(host => host.Address);
+
         foreach (var hostAddress in request.Hosts)
         {
-            var host = await _hostRepository.GetByAddress(hostAddress, cancellationToken);
-            if (host is null)
-            {
-                _hostRepository.Create(host);
-                continue;
-            }
+            var host = hostsByAddress.GetValueOrDefault(hostAddress)
+                ?? new Host { Address = hostAddress };
+
+            email.Hosts.Add(host);
         }
+
         _emailRepository.Create(email);
         await _unityOfWork.Save(cancellationToken);
 
