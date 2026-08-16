@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using NewsScrapingMonolithic.Application;
 using NewsScrapingMonolithic.Persistence;
 using NewsScrapingMonolithic.Persistence.Context;
@@ -44,7 +45,7 @@ var trigger = TriggerBuilder.Create()
 await scheduler.ScheduleJob(job, trigger);
 
 var dataContext = serviceScope.ServiceProvider.GetService<DataContext>();
-dataContext?.Database.EnsureCreated();
+dataContext?.Database.Migrate();
 
 if (app.Environment.IsDevelopment())
 { 
