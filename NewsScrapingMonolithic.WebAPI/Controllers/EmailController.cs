@@ -20,6 +20,6 @@ public class EmailController : ControllerBase
         CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(request,cancellationToken);
-        return Created("GetByAddress",new { id = response.Id });
+        return Created("GetByAddress", response);
     }
 }
