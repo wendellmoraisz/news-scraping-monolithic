@@ -7,24 +7,12 @@ namespace NewsScrapingMonolithic.Persistence.Services;
 
 public class ScrapingService : IScrapingService
 {
-    private readonly string _baseUrl;
-    private readonly string _host;
-    
-    public ScrapingService(string baseUrl, string host)
-    {
-        this._baseUrl = baseUrl;
-        this._host = host;
-    }
-
-    private const string BaseUrl = "https://altamira.ifpa.edu.br";
-    private const string Host = "altamira.ifpa.edu.br";
-
     public async Task<IEnumerable<News>> ExtractNews(string baseUrl, string host)
     {
         var newsUrl = $"{baseUrl}/ultimas-noticias";
         
         var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Add("host", Host);
+        httpClient.DefaultRequestHeaders.Add("host", host);
         
         var response = await httpClient.GetAsync(newsUrl);
         var pageHtml = await response.Content.ReadAsStringAsync();
