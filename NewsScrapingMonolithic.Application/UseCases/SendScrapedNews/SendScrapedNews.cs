@@ -26,7 +26,7 @@ public sealed class SendScrapedNews
         _unityOfWork = unityOfWork;
     }
 
-    public async Task Execute(CancellationToken cancellationToken, string baseUrl, string host)
+    public async Task Execute(string baseUrl, string host, CancellationToken cancellationToken)
     {
         var newsList = await _scrapingService.ExtractNews(baseUrl, host);
         var emailsList = await _emailRepository.GetAll(cancellationToken);
