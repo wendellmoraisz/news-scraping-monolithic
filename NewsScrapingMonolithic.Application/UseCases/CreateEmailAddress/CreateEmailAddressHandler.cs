@@ -9,7 +9,7 @@ public sealed class CreateEmailAddressHandler : IRequestHandler<CreateEmailAddre
 {
     private readonly IUnityOfWork _unityOfWork;
     private readonly IEmailRepository _emailRepository;
-    private readonly IHostRepository _hostRepository;
+    private readonly INewsPageRepository _newsPageRepository;
     private readonly IMapper _mapper;
 
     public CreateEmailAddressHandler
@@ -17,33 +17,37 @@ public sealed class CreateEmailAddressHandler : IRequestHandler<CreateEmailAddre
         IUnityOfWork unityOfWork,
         IEmailRepository emailRepository,
         IMapper mapper,
-        IHostRepository hostRepository
+        INewsPageRepository hostRepository
         )
     {
         _unityOfWork = unityOfWork;
         _emailRepository = emailRepository;
         _mapper = mapper;
-        _hostRepository = hostRepository;
+        _newsPageRepository = hostRepository;
     }
 
     public async Task<CreateEmailAddressResponse> Handle(CreateEmailAddressRequest request, CancellationToken cancellationToken)
     {
         var email = _mapper.Map<Email>(request);
 
-        var hostAdresses = request.Hosts
-        .Distinct()
-        .Select(hostAddress => hostAddress.Trim().ToLowerInvariant())
-        .ToArray();
+        var newsPagesByUrl = request.NewsPages
+            .GroupBy(newsPage => NormalizeUrl(newsPage.Url))
+            .ToDictionary(group => group.Key, group => group.First());
 
-        var existingHosts = await _hostRepository.GetByAddresses(hostAdresses, cancellationToken);
-        var hostsByAddress = existingHosts.ToDictionary(host => host.Address);
+        var existingNewsPages = await _newsPageRepository.GetByUrls(newsPagesByUrl.Keys.ToArray(), cancellationToken);
+        var existingNewsPagesByUrl = existingNewsPages.ToDictionary(newsPage => NormalizeUrl(newsPage.Url));
 
-        foreach (var hostAddress in request.Hosts)
+        foreach (var newsPage in newsPagesByUrl.Values)
         {
-            var host = hostsByAddress.GetValueOrDefault(hostAddress)
-                ?? new Host { Address = hostAddress };
+            var normalizedUrl = NormalizeUrl(newsPage.Url);
+            var page = existingNewsPagesByUrl.GetValueOrDefault(normalizedUrl)
+                ?? new NewsPage
+                {
+                    Url = normalizedUrl,
+                    HeaderHost = newsPage.HeaderHost.Trim()
+                };
 
-            email.Hosts.Add(host);
+            email.Hosts.Add(page);
         }
 
         _emailRepository.Create(email);
@@ -51,4 +55,6 @@ public sealed class CreateEmailAddressHandler : IRequestHandler<CreateEmailAddre
 
         return _mapper.Map<CreateEmailAddressResponse>(email);
     }
+
+    private static string NormalizeUrl(string url) => url.Trim().ToLowerInvariant();
 }

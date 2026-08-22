@@ -10,7 +10,7 @@ public class EmailRepository : BaseRepository<Email>, IEmailRepository
     public EmailRepository(DataContext context) : base(context)
     {
     }
-    
+
     public Task<Email?> GetByAddress(string emailAddress, CancellationToken cancellationToken)
     {
         return Context.Set<Email>().FirstOrDefaultAsync(x => x.Address == emailAddress, cancellationToken);
@@ -19,7 +19,7 @@ public class EmailRepository : BaseRepository<Email>, IEmailRepository
     public Task<List<Email>> GetByHost(string host, CancellationToken cancellationToken)
     {
         return Context.Emails
-            .Where(email => email.Hosts.Any(x => x.Address == host))
+            .Where(email => email.Hosts.Any(x => x.Url == host))
             .ToListAsync(cancellationToken: cancellationToken);
     }
 }

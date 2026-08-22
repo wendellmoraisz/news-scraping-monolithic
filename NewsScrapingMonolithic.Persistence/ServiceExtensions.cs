@@ -25,6 +25,6 @@ public static class ServiceExtensions
         {
             client.BaseAddress = new Uri("https://api.brevo.com/");
         });
-        services.AddScoped<IHostRepository, HostRepository>();
+        services.AddScoped<INewsPageRepository, NewsPageRepository>();
     }
 }

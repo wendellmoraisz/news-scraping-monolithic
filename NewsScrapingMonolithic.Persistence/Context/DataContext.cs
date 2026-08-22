@@ -23,17 +23,17 @@ public class DataContext : DbContext
                 .IsUnique();
         });
 
-        modelBuilder.Entity<Host>(entity =>
+        modelBuilder.Entity<NewsPage>(entity =>
         {
-            entity.Property(host => host.Address)
+            entity.Property(host => host.Url)
                 .IsRequired();
 
-            entity.HasIndex(host => host.Address)
+            entity.HasIndex(host => host.Url)
                 .IsUnique();
         });
     }
 
     public DbSet<Email> Emails { get; set; }
     public DbSet<News> News { get; set; }
-    public DbSet<Host> Hosts { get; set; }
+    public DbSet<NewsPage> NewsPages { get; set; }
 }
