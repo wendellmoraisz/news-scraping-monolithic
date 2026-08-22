@@ -21,7 +21,10 @@ public static class ServiceExtensions
         services.AddScoped<IEmailRepository, EmailRepository>();
         services.AddScoped<INewsRepository, NewsRepository>();
         services.AddScoped<IScrapingService, ScrapingService>();
-        services.AddScoped<IEmailService, EmailService>();
+        services.AddHttpClient<IEmailService, EmailService>(client =>
+        {
+            client.BaseAddress = new Uri("https://api.brevo.com/");
+        });
         services.AddScoped<IHostRepository, HostRepository>();
     }
 }

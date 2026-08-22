@@ -1,5 +1,5 @@
-using System.Net;
-using System.Net.Mail;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using Microsoft.Extensions.Options;
 using NewsScrapingMonolithic.Application.Services;
 using NewsScrapingMonolithic.Domain.Entities;
@@ -10,37 +10,45 @@ namespace NewsScrapingMonolithic.Persistence.Services;
 public class EmailService : IEmailService
 {
     private readonly EmailServiceCredentials _emailServiceCredentials;
-    private readonly SmtpClient _smtpClient;
+    private readonly HttpClient _httpClient;
 
-    public EmailService(IOptions<EmailServiceCredentials> options)
+    public EmailService(HttpClient httpClient, IOptions<EmailServiceCredentials> options)
     {
         _emailServiceCredentials = options.Value;
-        _smtpClient = new SmtpClient(_emailServiceCredentials.SmtpHost)
-        {
-            Port = _emailServiceCredentials.SmtpPort,
-            Credentials = new NetworkCredential(_emailServiceCredentials.SenderEmail, _emailServiceCredentials.SenderPassword),
-            EnableSsl = _emailServiceCredentials.EnableSsl,
-        };
+        _httpClient = httpClient;
     }
     
-    public Task Send(List<Email> emails, string subject, string content)
+    public async Task Send(List<Email> emails, string subject, string content)
     {
-        try
+        if (emails.Count == 0)
         {
-            foreach (var email in emails)
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_emailServiceCredentials.BrevoApiKey))
+        {
+            throw new InvalidOperationException("A chave da API da Brevo não foi configurada.");
+        }
+
+        var request = new HttpRequestMessage(HttpMethod.Post, "v3/smtp/email")
+        {
+            Content = JsonContent.Create(new
             {
-                var mailMessage = new MailMessage(_emailServiceCredentials.SenderEmail, email.Address, subject, content);
-                mailMessage.IsBodyHtml = true;
-                _smtpClient.Send(mailMessage);
-            }
+                sender = new
+                {
+                    name = _emailServiceCredentials.SenderName,
+                    email = _emailServiceCredentials.SenderEmail
+                },
+                to = emails.Select(email => new { email = email.Address }),
+                subject,
+                htmlContent = content
+            })
+        };
 
-            Console.WriteLine("E-mails enviados com sucesso!");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao enviar e-mail: {ex.Message}");
-        }
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        request.Headers.Add("api-key", _emailServiceCredentials.BrevoApiKey);
 
-        return Task.CompletedTask;
+        using var response = await _httpClient.SendAsync(request);
+        response.EnsureSuccessStatusCode();
     }
 }
