@@ -14,8 +14,7 @@ public class NewsScrapingScheduler : IJob
 
     public async Task Execute(IJobExecutionContext context)
     {
-        await _sendScrapedNews.Execute("https://altamira.ifpa.edu.br", "altamira.ifpa.edu.br", CancellationToken.None);
-        await _sendScrapedNews.Execute("https://ifpa.edu.br", "ifpa.edu.br", CancellationToken.None);
+        await _sendScrapedNews.Execute(context.CancellationToken);
     }
 
 }
