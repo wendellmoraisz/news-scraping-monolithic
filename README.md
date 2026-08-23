@@ -52,14 +52,24 @@ In addition to handling HTTP requests, this layer also hosts a **background serv
  
 ### How to use
 
- Clone repository
+Clone repository
 
 ```bash
   git clone "git@github.com:wendellmoraisz/news-scraping-monolithic.git"
   cd NewsScrapingMonolithic
 ```
 
-Fill environment variables on `docker-compose.override.yml` and run it:
+Create your local docker-compose override from the example:
+
+```bash
+  cp docker-compose.override.example.yml docker-compose.override.yml
+```
+
+Edit `docker-compose.override.yml` with your credentials:
+- MySQL root password
+- Email SMTP credentials (sender email, password, host, port)
+
+Run with Docker Compose:
 
 ```bash
   # Build
