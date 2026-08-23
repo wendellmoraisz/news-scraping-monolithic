@@ -73,8 +73,8 @@ Run with Docker Compose:
 
 ```bash
   # Build
-  docker-compose -f docker-compose.yml -f docker-compose.override.yml up --build
+  docker-compose up --build
 
   # Run
-  docker-compose -f docker-compose.yml -f docker-compose.override.yml up
+  docker-compose up
 ```
