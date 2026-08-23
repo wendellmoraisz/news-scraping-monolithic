@@ -8,12 +8,10 @@ public class ScrapingService : IScrapingService
 {
     public async Task<IEnumerable<News>> ExtractNews(NewsPage newsPage)
     {
-        var newsUrl = $"{newsPage.Url}/ultimas-noticias";
-
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("host", newsPage.HeaderHost);
 
-        var response = await httpClient.GetAsync(newsUrl);
+        var response = await httpClient.GetAsync(newsPage.Url);
         var pageHtml = await response.Content.ReadAsStringAsync();
 
         var htmlDocument = new HtmlDocument();
