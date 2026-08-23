@@ -22,10 +22,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings__NewsScrapingDbConfig=server=newsscrapingdb;port=3306;database=NewsScraping;user=root;password=your_mysql_root_password"
       - "EmailServiceCredentials__SenderEmail=your_email@domain.com"
-      - "EmailServiceCredentials__SenderPassword=your_email_password"
-      - "EmailServiceCredentials__SmtpHost=smtp-mail.outlook.com"
-      - "EmailServiceCredentials__SmtpPort=587"
-      - "EmailServiceCredentials__EnableSsl=true"
+      - "EmailServiceCredentials__SenderName=your_sender_name"
+      - "EmailServiceCredentials__BrevoApiKey=your_api_key"
     depends_on:
       newsscrapingdb:
         condition: service_healthy
