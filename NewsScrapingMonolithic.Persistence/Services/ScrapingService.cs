@@ -6,7 +6,7 @@ namespace NewsScrapingMonolithic.Persistence.Services;
 
 public class ScrapingService : IScrapingService
 {
-    public async Task<IEnumerable<News>> ExtractNews(NewsPage newsPage)
+    public async Task<IEnumerable<NewsTitleDto>> ExtractNewsTitles(NewsPage newsPage)
     {
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("host", newsPage.HeaderHost);
@@ -18,24 +18,16 @@ public class ScrapingService : IScrapingService
         htmlDocument.LoadHtml(pageHtml);
 
         var newsHeaders = htmlDocument.DocumentNode.SelectNodes("//h2[@class='tileHeadline']");
-        var newsList = new List<News>();
+        if (newsHeaders == null) return new List<NewsTitleDto>();
 
-        if (newsHeaders == null) return newsList;
-        foreach (var newsHeader in newsHeaders)
-        {
-            var news = new News
-            {
-                Title = newsHeader.SelectSingleNode("a").InnerText,
-                Content = await GetDescriptionAsync(newsPage.Url, newsPage.HeaderHost, newsHeader.SelectSingleNode("a").GetAttributeValue("href", "")),
-                NewsPage = newsPage
-            };
-            newsList.Add(news);
-        }
-
-        return newsList;
+        return newsHeaders
+            .Select(header => header.SelectSingleNode("a"))
+            .Where(a => a != null)
+            .Select(a => new NewsTitleDto(a.InnerText, a.GetAttributeValue("href", "")))
+            .ToList();
     }
 
-    private async Task<string> GetDescriptionAsync(string baseUrl, string host, string descUrl)
+    public async Task<string> GetDescription(string baseUrl, string host, string descUrl)
     {
         using var httpClient = new HttpClient();
         using var response = await httpClient.GetAsync(baseUrl + descUrl);

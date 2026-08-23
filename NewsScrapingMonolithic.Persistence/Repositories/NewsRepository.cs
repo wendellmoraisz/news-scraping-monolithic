@@ -15,4 +15,10 @@ public class NewsRepository : BaseRepository<News>, INewsRepository
     {
         return Context.Set<News>().FirstOrDefaultAsync(x => x.Title == newsTitle, cancellationToken);
     }
+
+    public async Task<IEnumerable<News>> GetByTitles(IEnumerable<string> newsTitles, CancellationToken cancellationToken)
+    {
+        var query = Context.Set<News>().Where(x => newsTitles.Contains(x.Title));
+        return await query.ToListAsync(cancellationToken);
+    }
 }

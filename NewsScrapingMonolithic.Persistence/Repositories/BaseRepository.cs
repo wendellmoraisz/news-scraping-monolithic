@@ -14,12 +14,17 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         Context = context;
     }
 
-    public void Create(T entity)
-    {
-        Context.Add(entity);
-    }
+public void Create(T entity)
+{
+    Context.Add(entity);
+}
 
-    public void Update(T entity)
+public void CreateRange(IEnumerable<T> entities)
+{
+    Context.AddRange(entities);
+}
+
+public void Update(T entity)
     {
         Context.Update(entity);
     }

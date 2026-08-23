@@ -1,5 +1,6 @@
 using NewsScrapingMonolithic.Application.Repositories;
 using NewsScrapingMonolithic.Application.Services;
+using NewsScrapingMonolithic.Domain.Entities;
 
 namespace NewsScrapingMonolithic.Application.UseCases.SendScrapedNews;
 
@@ -18,8 +19,7 @@ public sealed class SendScrapedNews
         INewsRepository newsRepository,
         IEmailRepository emailRepository,
         INewsPageRepository newsPageRepository,
-        IUnityOfWork unityOfWork
-        )
+        IUnityOfWork unityOfWork)
     {
         _emailService = emailService;
         _scrapingService = scrapingService;
@@ -35,18 +35,56 @@ public sealed class SendScrapedNews
 
         foreach (var newsPage in newsPages)
         {
-            var newsList = await _scrapingService.ExtractNews(newsPage);
-            var emailsList = await _emailRepository.GetByNewsPageId(newsPage.Id, cancellationToken);
-
-            foreach (var news in newsList)
-            {
-                var newsIsAlreadySent = await _newsRepository.GetByTitle(news.Title, cancellationToken) != null;
-                if (newsIsAlreadySent) continue;
-
-                _newsRepository.Create(news);
-                await _unityOfWork.Save(cancellationToken);
-                await _emailService.Send(emailsList, news.Title, news.Content);
-            }
+            await ProcessNewsPage(newsPage, cancellationToken);
         }
+    }
+
+    private async Task ProcessNewsPage(NewsPage newsPage, CancellationToken cancellationToken)
+    {
+        var newNewsItems = await GetNewNewsItems(newsPage, cancellationToken);
+        if (newNewsItems.Count == 0) return;
+
+        var emailsList = await _emailRepository.GetByNewsPageId(newsPage.Id, cancellationToken);
+        var newsToCreate = await BuildNewsEntities(newNewsItems, newsPage, cancellationToken);
+
+        await SaveAndNotify(newsToCreate, emailsList, cancellationToken);
+    }
+
+    private async Task<List<NewsTitleDto>> GetNewNewsItems(NewsPage newsPage, CancellationToken cancellationToken)
+    {
+        var extractedNews = await _scrapingService.ExtractNewsTitles(newsPage);
+        var extractedTitles = extractedNews.Select(n => n.Title).ToList();
+
+        var existingNews = await _newsRepository.GetByTitles(extractedTitles, cancellationToken);
+        var existingTitles = new HashSet<string>(existingNews.Select(n => n.Title));
+
+        return extractedNews.Where(n => !existingTitles.Contains(n.Title)).ToList();
+    }
+
+    private async Task<List<News>> BuildNewsEntities(List<NewsTitleDto> newItems, NewsPage newsPage, CancellationToken cancellationToken)
+    {
+        var newsList = new List<News>();
+
+        foreach (var item in newItems)
+        {
+            var description = await _scrapingService.GetDescription(newsPage.Url, newsPage.HeaderHost, item.Url);
+            newsList.Add(new News
+            {
+                Title = item.Title,
+                Content = description,
+                NewsPage = newsPage
+            });
+        }
+
+        return newsList;
+    }
+
+    private async Task SaveAndNotify(List<News> news, List<Email> emails, CancellationToken cancellationToken)
+    {
+        _newsRepository.CreateRange(news);
+        await _unityOfWork.Save(cancellationToken);
+
+        foreach (var n in news)
+            await _emailService.Send(emails, n.Title, n.Content);
     }
 }
