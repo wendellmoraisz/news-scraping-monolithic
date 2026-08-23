@@ -23,6 +23,14 @@ public class DataContext : DbContext
                 .IsUnique();
         });
 
+        modelBuilder.Entity<News>(entity =>
+        {
+            entity.HasOne(news => news.NewsPage)
+                .WithMany(page => page.News)
+                .HasForeignKey(news => news.NewsPageId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
         modelBuilder.Entity<NewsPage>(entity =>
         {
             entity.Property(host => host.Url)

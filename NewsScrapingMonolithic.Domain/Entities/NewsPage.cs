@@ -7,4 +7,5 @@ public sealed class NewsPage : BaseEntity
     public required string Url { get; set; }
     public required string HeaderHost { get; set; }
     public ICollection<Email> Emails { get; set; } = new List<Email>();
+    public ICollection<News> News { get; set; } = new List<News>();
 }
