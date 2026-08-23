@@ -1,5 +1,3 @@
-version: "3.4"
-
 services: 
   newsscrapingdb:
     image: mysql
