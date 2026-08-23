@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using NewsScrapingMonolithic.Application.Services;
 using HtmlAgilityPack;
 using NewsScrapingMonolithic.Domain.Entities;
@@ -7,19 +6,19 @@ namespace NewsScrapingMonolithic.Persistence.Services;
 
 public class ScrapingService : IScrapingService
 {
-    public async Task<IEnumerable<News>> ExtractNews(string baseUrl, string host)
+    public async Task<IEnumerable<News>> ExtractNews(NewsPage newsPage)
     {
-        var newsUrl = $"{baseUrl}/ultimas-noticias";
-        
+        var newsUrl = $"{newsPage.Url}/ultimas-noticias";
+
         var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Add("host", host);
-        
+        httpClient.DefaultRequestHeaders.Add("host", newsPage.HeaderHost);
+
         var response = await httpClient.GetAsync(newsUrl);
         var pageHtml = await response.Content.ReadAsStringAsync();
 
         var htmlDocument = new HtmlDocument();
         htmlDocument.LoadHtml(pageHtml);
-        
+
         var newsHeaders = htmlDocument.DocumentNode.SelectNodes("//h2[@class='tileHeadline']");
         var newsList = new List<News>();
 
@@ -29,7 +28,8 @@ public class ScrapingService : IScrapingService
             var news = new News
             {
                 Title = newsHeader.SelectSingleNode("a").InnerText,
-                Content = await GetDescriptionAsync(baseUrl, host, newsHeader.SelectSingleNode("a").GetAttributeValue("href", ""))
+                Content = await GetDescriptionAsync(newsPage.Url, newsPage.HeaderHost, newsHeader.SelectSingleNode("a").GetAttributeValue("href", "")),
+                NewsPage = newsPage
             };
             newsList.Add(news);
         }
@@ -42,24 +42,24 @@ public class ScrapingService : IScrapingService
         using var httpClient = new HttpClient();
         using var response = await httpClient.GetAsync(baseUrl + descUrl);
         var pageContent = await response.Content.ReadAsStringAsync();
-        
+
         var htmlDocument = new HtmlDocument();
         htmlDocument.LoadHtml(pageContent);
 
         var contentSection = htmlDocument.DocumentNode.SelectSingleNode("//div[@class='item-page']");
 
         if (contentSection == null) return string.Empty;
-        
+
         var nodesToRemove = contentSection.SelectNodes(
             "//div[contains(@class, 'content-header-options-1')]" +
             "| //span[contains(@class, documentCategory)]" +
             "| //h1[contains(@class, 'secondaryHeading')]"
         );
-            
+
         RemoveNodes(nodesToRemove);
         SetHostUrlInImagesSrc(host, contentSection.Descendants("img"));
         SetHostUrlInLinksHref(host, contentSection.Descendants("a"));
-        
+
         return contentSection.InnerHtml;
     }
 

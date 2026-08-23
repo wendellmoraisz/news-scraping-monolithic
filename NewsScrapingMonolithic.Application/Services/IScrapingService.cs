@@ -4,5 +4,5 @@ namespace NewsScrapingMonolithic.Application.Services;
 
 public interface IScrapingService
 {
-    Task<IEnumerable<News>> ExtractNews(string baseUrl, string host);
+    Task<IEnumerable<News>> ExtractNews(NewsPage newsPage);
 }

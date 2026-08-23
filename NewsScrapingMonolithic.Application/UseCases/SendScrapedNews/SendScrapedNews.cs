@@ -35,7 +35,7 @@ public sealed class SendScrapedNews
 
         foreach (var newsPage in newsPages)
         {
-            var newsList = await _scrapingService.ExtractNews(newsPage.Url, newsPage.HeaderHost);
+            var newsList = await _scrapingService.ExtractNews(newsPage);
             var emailsList = await _emailRepository.GetByNewsPageId(newsPage.Id, cancellationToken);
 
             foreach (var news in newsList)
